@@ -4,9 +4,32 @@ from flask import Flask, make_response
 from markupsafe import escape
 from flask import render_template
 from flask import request
+import tkinter as tk
+from tkinter import ttk
+from flask_sqlalchemy import SQLAlchemy
+from flask import redirect
+from flask import url_for
+
 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://rootuser:120893guiTD!@localhost:3306/schema_mapOrm'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class Usuario(db.Model):
+    id = db.Column('usu_id', db.Integer, primary_key=True)
+    nome = db.Column('usu_nome', db.String(256))
+    email = db.Column('usu_email', db.String(256))
+    senha = db.Column('usu_senha', db.String(256))
+    end = db.Column('usu_end', db.String(256))
+
+    def __init__(self, nome, email, senha, end):
+        self.nome = nome
+        self.email = email
+        self.senha = senha
+        self.end = end
 
 @app.route("/")
 def index():
@@ -15,14 +38,17 @@ def index():
 
 
 @app.route('/cad/usuario')
-def usuario():
+def cadusuario():
     return render_template('usuario.html', titulo='Cadastro de Usuário')
 
 
 
 @app.route('/cad/caduser', methods=['POST'])
 def caduser():
-    return request.form
+    usuario = Usuario(request.form.get('user'), request.form.get('email'),request.form.get('passwd'),request.form.get('end'))
+    db.session.add(usuario)
+    db.session.commit()
+    return render_template('index.html')
 
 
 @app.route('/cad/anuncio')
@@ -70,3 +96,7 @@ def relVendas():
 @app.route('/relatarios/compras')
 def relCompras():
     return render_template('relCompras.html', titulo='Seu histórico de compras')
+
+
+if __name__ == 'newold':
+    db.create_all()
