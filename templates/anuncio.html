@@ -4,9 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>New Old - Anúncios</title>
 </head>
 <body>
     <h2>Anúncios</h2>
+    <form action="/anuncio/novo" method="post">
+        <p><label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome"></p>
+
+        <p><label for="desc">Descrição</label>
+        <textarea rows="4" cols="50" id="desc" name="desc"></textarea></p>
+
+        <p><label for="qtd">Quantidade</label>
+        <input type="text" id="qtd" name="qtd"></p>  
+
+        <p><label for="preco">Preço</label>
+        <input type="text" id="preco" name="preco"></p>
+        
+        <p><label for="cat">Categoria</label>
+        <select type="text" id="cat" name="cat">
+            {% for categoria in categorias %}
+                <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+            {% endfor %}    
+        </select></p> 
+        <input type="submit" value="Cadastrar">    
+    </form>
 </body>
 </html>

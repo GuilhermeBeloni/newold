@@ -7,8 +7,9 @@ from flask import request
 import tkinter as tk
 from tkinter import ttk
 from flask_sqlalchemy import SQLAlchemy
-from flask import redirect
 from flask import url_for
+from flask import redirect
+
 
 
 
@@ -17,6 +18,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://rootuser:120893guiTD!@localhost
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
+
+#OBJETOS
 
 class Usuario(db.Model):
     id = db.Column('usu_id', db.Integer, primary_key=True)
@@ -31,6 +35,35 @@ class Usuario(db.Model):
         self.senha = senha
         self.end = end
 
+class Anuncio(db.Model):
+    id = db.Column('anuncio_id', db.Integer, primary_key=True)
+    nome = db.Column('anuncio_nome', db.String(256))
+    desc = db.Column('anuncio_desc', db.String(256))
+    qtd = db.Column('anuncio_qtd', db.String(256))
+    preco = db.Column('anuncio_preco', db.String(256))
+    cat = db.Column('anuncio_cat', db.String(256))
+
+
+    def __init__(self, nome, desc, qtd, preco, cat):
+        self.nome = nome
+        self.desc = desc
+        self.qtd = qtd
+        self.preco = preco
+        self.cat = cat
+
+
+class Categoria(db.Model):
+    id = db.Column('anuncio_id', db.Integer, primary_key=True)
+    nome = db.Column('anuncio_nome', db.String(256))
+    
+
+
+    def __init__(self, nome, desc):
+        self.nome = nome
+        self.desc = desc
+        
+
+#ROTAS
 @app.route("/")
 def index():
     return render_template('index.html')
@@ -38,17 +71,51 @@ def index():
 
 
 @app.route('/cad/usuario')
-def cadusuario():
-    return render_template('usuario.html', titulo='Cadastro de Usuário')
+def usuario():
+    return render_template('usuario.html', usuarios = Usuario.query.all(), titulo='Usuário')
 
 
 
-@app.route('/cad/caduser', methods=['POST'])
-def caduser():
+@app.route('/usuario/criar', methods=['POST'])
+def criarusuario():
     usuario = Usuario(request.form.get('user'), request.form.get('email'),request.form.get('passwd'),request.form.get('end'))
     db.session.add(usuario)
     db.session.commit()
-    return render_template('index.html')
+    return redirect(url_for('usuario'))
+    '''return render_template('index.html')'''
+
+
+@app.route('/usuario/detalhar/<int:id>')
+def buscarusuario(id):
+    usuario = Usuario.query.get(id)
+    return usuario.nome
+
+
+@app.route('/usuario/editar/<int:id>', methods=['GET', 'POST'])
+def editarusuario(id):
+    usuario = Usuario.query.get(id)
+    if request.method == 'POST':
+        usuario.nome = request.form.get('user')
+        usuario.email = request.form.get('email')
+        usuario.senha = request.form.get('passwd')
+        usuario.end = request.form.get('end')
+
+        db.session.add(usuario)
+        db.session.commit()
+
+        return redirect(url_for('usuario'))
+
+    return render_template('editusuario.html', usuario = usuario, titulo='Usuario')   
+    
+
+
+@app.route('/usuario/deletar/<int:id>')
+def deletarusuario(id):
+    usuario = Usuario.query.get(id)
+    db.session.delete(usuario)
+    db.session.commit()
+    return redirect(url_for('usuario'))
+
 
 
 @app.route('/cad/anuncio')
@@ -56,6 +123,12 @@ def anuncio():
     return render_template('anuncio.html')
 
 
+@app.route('/anuncio/novo', methods=['POST'])
+def novoanuncio():
+    anuncio = Anuncio(request.form.get('nome'), request.form.get('desc'), request.form.get('qtd'), request.form.get('preco'), request.form.get('cat'))
+    db.session.add(anuncio)
+    db.session.commit()
+    return redirect(url_for('anuncio'))
 
 @app.route('/anuncios/perguntas')
 def pergunta():
@@ -84,6 +157,14 @@ def favorito():
 @app.route('/config/categoria')
 def categoria():
     return render_template('categoria.html', titulo='Categoria dos produtos')
+
+
+@app.route('/categoria/novo', methods=['POST'])
+def novacategoria():
+    categoria = Categoria(request.form.get('nome'), request.form.get('desc'))
+    db.session.add(categoria)
+    db.session.commit()
+    return redirect(url_for('categoria'))
 
 
 

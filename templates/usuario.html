@@ -7,8 +7,8 @@
     <title>New Old - Entrar</title>
 </head>
 <body>
-    <h2>{{titulo}}</h2>
-    <form action="caduser" method="post">
+    <h2>Cadastro de {{titulo}}</h2>
+    <form action="/usuario/criar" method="post">
         <p><label for="user">Nome</label></p>
         <p><input type="text" id="user" name="user"></p>
 
@@ -23,5 +23,31 @@
 
         <input type="submit" value="Cadastrar">
     </form>
+    <h4>Lista de {{titulo}}</h4>
+    <table>
+        <thead>
+            <tr>
+                <tr>Nome</tr>
+                <tr>E-mail</tr>
+                <tr>Senha</tr>
+                <tr>Endereço</tr>
+                <tr>Deletar</tr>
+                <tr>Editar</tr>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.nome }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.senha }}</td>
+                    <td>{{ usuario.end }}</td>
+                    <td><a href={{url_for("deletarusuario",id=usuario.id) }}>Deletar</a></td>
+                    <td><a href={{url_for("editarusuario",id=usuario.id) }}>Editar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </body>
 </html>

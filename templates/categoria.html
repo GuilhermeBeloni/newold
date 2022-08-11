@@ -8,7 +8,24 @@
 </head>
 <body>
     <h3>{{titulo}}</h3>
-    <p><a href='novo.html'>Novo</a></p>
-    <p><a href='usado.html'>Usado</a></p>
+    <form action="/categoria/novo" method="post">
+        <p><label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome"></p>
+
+        <p><label for="desc">Descrição</label>
+            <input type="text" name="desc" id="desc"></p>
+        
+        <input type="submit" value="Cadastrar">
+    </form>
+
+    <h4>Lista de {{titulo}}</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+    </table>
 </body>
 </html>
