@@ -64,6 +64,12 @@ class Categoria(db.Model):
         
 
 #ROTAS
+
+@app.errorhandler(404)
+def pagina404(error):
+    return render_template('error404.html')
+
+
 @app.route("/")
 def index():
     return render_template('index.html')
@@ -123,12 +129,14 @@ def anuncio():
     return render_template('anuncio.html')
 
 
-@app.route('/anuncio/novo', methods=['POST'])
-def novoanuncio():
+@app.route('/anuncio/criar', methods=['POST'])
+def criaranuncio():
     anuncio = Anuncio(request.form.get('nome'), request.form.get('desc'), request.form.get('qtd'), request.form.get('preco'), request.form.get('cat'))
     db.session.add(anuncio)
     db.session.commit()
     return redirect(url_for('anuncio'))
+
+
 
 @app.route('/anuncios/perguntas')
 def pergunta():
@@ -159,8 +167,8 @@ def categoria():
     return render_template('categoria.html', titulo='Categoria dos produtos')
 
 
-@app.route('/categoria/novo', methods=['POST'])
-def novacategoria():
+@app.route('/categoria/criar', methods=['POST'])
+def criarcategoria():
     categoria = Categoria(request.form.get('nome'), request.form.get('desc'))
     db.session.add(categoria)
     db.session.commit()
