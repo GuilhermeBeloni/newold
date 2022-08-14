@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Old - Categoria</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h3>{{titulo}}</h3>
@@ -33,7 +34,7 @@
                 <tr>
                     <td>{{ categoria.nome }}</td>
                     <td>{{ categoria.desc }}</td>
-                    <td><a href={{url_for("deletarcategoria",id=categoria.id) }}>Deletar</a></td>
+                    <td><a href={{url_for("deletarcategoria",id=categoria.id) }}><img class="imglixo" src="{{ url_for('static', filename='lixo.png') }}" alt=""></a></td>
                 </tr>
             {% endfor %}
         </tbody>

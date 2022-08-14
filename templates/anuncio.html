@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Old - Anúncios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h2>Anúncios</h2>
@@ -55,7 +56,7 @@
                     <td>{{ anuncio.qtd }}</td>
                     <td>{{ anuncio.preco }}</td>
                     <td>{{ anuncio.categoria_id }}</td>
-                    
+                    <td><a href={{url_for("deletaranuncio",id=anuncio.id) }}><img class="imglixo" src="{{ url_for('static', filename='lixo.png') }}" alt=""></a></td>
                 
                 </tr>
             {% endfor %}

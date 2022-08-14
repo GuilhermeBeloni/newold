@@ -148,6 +148,14 @@ def criaranuncio():
 
 
 
+@app.route('/anuncio/deletar/<int:id>')
+def deletaranuncio(id):
+    anuncio = Anuncio.query.get(id)
+    db.session.delete(anuncio)
+    db.session.commit()
+    return redirect(url_for('anuncio'))  
+
+
 @app.route('/anuncios/perguntas')
 def pergunta():
     return render_template('pergunta.html')
