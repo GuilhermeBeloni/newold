@@ -39,22 +39,25 @@ class Anuncio(db.Model):
     id = db.Column('anuncio_id', db.Integer, primary_key=True)
     nome = db.Column('anuncio_nome', db.String(256))
     desc = db.Column('anuncio_desc', db.String(256))
-    qtd = db.Column('anuncio_qtd', db.String(256))
-    preco = db.Column('anuncio_preco', db.String(256))
-    cat = db.Column('anuncio_cat', db.String(256))
+    qtd = db.Column('anuncio_qtd', db.Integer)
+    preco = db.Column('anuncio_preco', db.Float)
+    categoria_id = db.Column('categoria_id',db.Integer, db.ForeignKey("categoria.categoria_id"))
+    usu_id = db.Column('usu_id',db.Integer, db.ForeignKey("usuario.usu_id"))
 
 
-    def __init__(self, nome, desc, qtd, preco, cat):
+    def __init__(self, nome, desc, qtd, preco, categoria_id, usu_id):
         self.nome = nome
         self.desc = desc
         self.qtd = qtd
         self.preco = preco
-        self.cat = cat
+        self.categoria = categoria_id
+        self.usu_id = usu_id
 
 
 class Categoria(db.Model):
-    id = db.Column('anuncio_id', db.Integer, primary_key=True)
-    nome = db.Column('anuncio_nome', db.String(256))
+    id = db.Column('categoria_id', db.Integer, primary_key=True)
+    nome = db.Column('categoria_nome', db.String(256))
+    desc = db.Column('categoria_desc', db.String(256))
     
 
 
@@ -70,11 +73,14 @@ def pagina404(error):
     return render_template('error404.html')
 
 
+
 @app.route("/")
 def index():
     return render_template('index.html')
 
 
+
+#usuario
 
 @app.route('/cad/usuario')
 def usuario():
@@ -124,14 +130,18 @@ def deletarusuario(id):
 
 
 
+
+
+#anuncio
+
 @app.route('/cad/anuncio')
 def anuncio():
-    return render_template('anuncio.html')
+    return render_template('anuncio.html', anuncios = Anuncio.query.all(), categorias = Categoria.query.all(), titulo='Anúncios')
 
 
 @app.route('/anuncio/criar', methods=['POST'])
 def criaranuncio():
-    anuncio = Anuncio(request.form.get('nome'), request.form.get('desc'), request.form.get('qtd'), request.form.get('preco'), request.form.get('cat'))
+    anuncio = Anuncio(request.form.get('nome'), request.form.get('desc'), request.form.get('qtd'), request.form.get('preco'), request.form.get('categoria'), request.form.get('uso'))
     db.session.add(anuncio)
     db.session.commit()
     return redirect(url_for('anuncio'))
@@ -143,9 +153,9 @@ def pergunta():
     return render_template('pergunta.html')
 
 
-@app.route('/anuncio/pergunta', methods=['POST'])
+'''@app.route('/anuncio/pergunta', methods=['POST'])
 def anunciopergunta():
-    return request.form
+    return render_template('pergunta.html')'''
 
 
 
@@ -162,9 +172,15 @@ def favorito():
     return render_template('favorito.html')
 
 
-@app.route('/config/categoria')
+
+
+
+#categoria
+
+
+@app.route('/cad/categoria')
 def categoria():
-    return render_template('categoria.html', titulo='Categoria dos produtos')
+    return render_template('categoria.html', categorias = Categoria.query.all(), titulo= 'Categoria dos produtos')
 
 
 @app.route('/categoria/criar', methods=['POST'])
@@ -175,6 +191,20 @@ def criarcategoria():
     return redirect(url_for('categoria'))
 
 
+@app.route('/categoria/deletar/<int:id>')
+def deletarcategoria(id):
+    categoria = Categoria.query.get(id)
+    db.session.delete(categoria)
+    db.session.commit()
+    return redirect(url_for('categoria'))    
+
+
+
+
+
+
+
+#relatorios
 
 @app.route('/relatorios/vendas')
 def relVendas():

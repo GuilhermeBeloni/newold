@@ -21,13 +21,45 @@
         <p><label for="preco">Preço</label>
         <input type="text" id="preco" name="preco"></p>
         
-        <p><label for="cat">Categoria</label>
-        <select type="text" id="cat" name="cat">
+        <p><label for="categoria">Categoria</label>
+        <select id="categoria" name="categoria">
             {% for categoria in categorias %}
                 <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
             {% endfor %}    
         </select></p> 
+
+        <p><label for="usu">Usuario</label>
+            <input type="text" id="uso" name="uso"></p>
+
         <input type="submit" value="Cadastrar">    
     </form>
+
+    <h4>Lista de {{titulo}}</h4>
+    <table>
+        <thead>
+            <tr>
+                <tr>Nome</tr>
+                <tr>Descrição</tr>
+                <tr>Quantidade</tr>
+                <tr>Preço</tr>
+                <tr>Categoria</tr>
+                <tr>Deletar</tr>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for anuncio in anuncios %}
+                <tr>
+                    <td>{{ anuncio.nome }}</td>
+                    <td>{{ anuncio.desc }}</td>
+                    <td>{{ anuncio.qtd }}</td>
+                    <td>{{ anuncio.preco }}</td>
+                    <td>{{ anuncio.categoria_id }}</td>
+                    
+                
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

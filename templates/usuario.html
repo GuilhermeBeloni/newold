@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Old - Entrar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h2>Cadastro de {{titulo}}</h2>
@@ -42,8 +43,9 @@
                     <td>{{ usuario.email }}</td>
                     <td>{{ usuario.senha }}</td>
                     <td>{{ usuario.end }}</td>
-                    <td><a href={{url_for("deletarusuario",id=usuario.id) }}>Deletar</a></td>
-                    <td><a href={{url_for("editarusuario",id=usuario.id) }}>Editar</a></td>
+                    <td><a href={{url_for("deletarusuario",id=usuario.id) }}><img class="imglixo" src="{{ url_for('static', filename='lixo.png') }}" alt=""></a></td>
+                    
+                    <td><a href={{url_for("editarusuario",id=usuario.id) }}><img class="imgeditar" src="{{ url_for('static', filename='editar.png') }}" alt=""></a></td>
                 </tr>
             {% endfor %}
         </tbody>

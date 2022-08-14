@@ -24,8 +24,19 @@
             <tr>
                 <th>Nome</th>
                 <th>Descrição</th>
+                <th>Deletar</th>
+                
             </tr>
         </thead>
+        <tbody>
+            {% for categoria in categorias %}
+                <tr>
+                    <td>{{ categoria.nome }}</td>
+                    <td>{{ categoria.desc }}</td>
+                    <td><a href={{url_for("deletarcategoria",id=categoria.id) }}>Deletar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
 </body>
 </html>
