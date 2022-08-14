@@ -1,3 +1,4 @@
+#BIBLIOTECAS
 from crypt import methods
 from turtle import title
 from flask import Flask, make_response
@@ -14,7 +15,7 @@ from flask import redirect
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://rootuser:120893guiTD!@localhost:3306/schema_mapOrm'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://rootuser:120893guiTD!@localhost:3306/schema_mapOrm'    #INDICAÇÃO PARA O BANCO, USUÁRIO, SENHA, ENDEREÇO, PORTA E DB.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -22,9 +23,9 @@ db = SQLAlchemy(app)
 
 #OBJETOS
 
-class Usuario(db.Model):
-    id = db.Column('usu_id', db.Integer, primary_key=True)
-    nome = db.Column('usu_nome', db.String(256))
+class Usuario(db.Model):                                        # CRIAÇÃO OBJETO USUARIO    
+    id = db.Column('usu_id', db.Integer, primary_key=True)      # CRIANDO ID INTEIRO E PASSANDO PARA O BANCO
+    nome = db.Column('usu_nome', db.String(256))                # CRIANDO NOME STRING
     email = db.Column('usu_email', db.String(256))
     senha = db.Column('usu_senha', db.String(256))
     end = db.Column('usu_end', db.String(256))
@@ -70,11 +71,11 @@ class Categoria(db.Model):
 
 @app.errorhandler(404)
 def pagina404(error):
-    return render_template('error404.html')
+    return render_template('error404.html')         #ROTA DE PAGINA NÃO ENCONTRADA 404
 
 
 
-@app.route("/")
+@app.route("/")                                     #ROTA PAGINA INICIAL    
 def index():
     return render_template('index.html')
 
@@ -84,13 +85,13 @@ def index():
 
 @app.route('/cad/usuario')
 def usuario():
-    return render_template('usuario.html', usuarios = Usuario.query.all(), titulo='Usuário')
+    return render_template('usuario.html', usuarios = Usuario.query.all(), titulo='Usuário')        #RETORNA A PAGINA HTML USUARIO COM A O FORMULÁRIO DE CADASTRO
 
 
 
 @app.route('/usuario/criar', methods=['POST'])
 def criarusuario():
-    usuario = Usuario(request.form.get('user'), request.form.get('email'),request.form.get('passwd'),request.form.get('end'))
+    usuario = Usuario(request.form.get('user'), request.form.get('email'),request.form.get('passwd'),request.form.get('end'))       #PEGA OS DADOS DO CADASTRO E JOGA PARA O BANCO
     db.session.add(usuario)
     db.session.commit()
     return redirect(url_for('usuario'))
