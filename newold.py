@@ -10,6 +10,8 @@ from tkinter import ttk
 from flask_sqlalchemy import SQLAlchemy
 from flask import url_for
 from flask import redirect
+from flask_login import (current_user, LoginManager,
+login_user, logout_user, login_required)
 
 
 
@@ -20,6 +22,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+
+app.secret_key = 'nao consegui importar login'
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
 
 #OBJETOS
 
@@ -35,6 +42,21 @@ class Usuario(db.Model):                                        # CRIAÇÃO OBJE
         self.email = email
         self.senha = senha
         self.end = end
+
+    def is_authenticated(self):
+        return True
+
+    def is_activate(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)              
+
+
+
 
 class Anuncio(db.Model):
     id = db.Column('anuncio_id', db.Integer, primary_key=True)
@@ -74,6 +96,11 @@ def pagina404(error):
     return render_template('error404.html')         #ROTA DE PAGINA NÃO ENCONTRADA 404
 
 
+@login_manager.user_loader
+def load_user(id):
+    return Usuario.query.get(id)
+
+
 
 @app.route("/")                                     #ROTA PAGINA INICIAL    
 def index():
@@ -81,9 +108,34 @@ def index():
 
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        passwd = request.form.get('passwd')
+
+        user = Usuario.query.filter_by(email=email, senha=passwd).first()
+
+        if user:
+            login_user(user)
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('login'))   
+    else:
+        return render_template('login.html')        
+
+
+
+@app.route('/logout')
+def logout():
+    logout_user() 
+    return redirect(url_for('index'))
+
+
 #usuario
 
 @app.route('/cad/usuario')
+@login_required
 def usuario():
     return render_template('usuario.html', usuarios = Usuario.query.all(), titulo='Usuário')        #RETORNA A PAGINA HTML USUARIO COM A O FORMULÁRIO DE CADASTRO
 
