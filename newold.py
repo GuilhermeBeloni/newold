@@ -12,6 +12,8 @@ from flask import url_for
 from flask import redirect
 from flask_login import (current_user, LoginManager,
 login_user, logout_user, login_required)
+from flask_login import UserMixin
+import hashlib
 
 
 
@@ -30,7 +32,7 @@ login_manager.login_view = 'login'
 
 #OBJETOS
 
-class Usuario(db.Model):                                        # CRIAÇÃO OBJETO USUARIO    
+class Usuario(db.Model, UserMixin):                                        # CRIAÇÃO OBJETO USUARIO    
     id = db.Column('usu_id', db.Integer, primary_key=True)      # CRIANDO ID INTEIRO E PASSANDO PARA O BANCO
     nome = db.Column('usu_nome', db.String(256))                # CRIANDO NOME STRING
     email = db.Column('usu_email', db.String(256))
@@ -102,7 +104,8 @@ def load_user(id):
 
 
 
-@app.route("/")                                     #ROTA PAGINA INICIAL    
+@app.route("/") 
+@login_required                                    #ROTA PAGINA INICIAL    
 def index():
     return render_template('index.html')
 
@@ -112,7 +115,8 @@ def index():
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
-        passwd = request.form.get('passwd')
+        passwd = hashlib.sha512(str(request.form.get('passwd')).encode('utf-8')).hexdigest()
+        
 
         user = Usuario.query.filter_by(email=email, senha=passwd).first()
 
@@ -143,7 +147,8 @@ def usuario():
 
 @app.route('/usuario/criar', methods=['POST'])
 def criarusuario():
-    usuario = Usuario(request.form.get('user'), request.form.get('email'),request.form.get('passwd'),request.form.get('end'))       #PEGA OS DADOS DO CADASTRO E JOGA PARA O BANCO
+    hash = hashlib.sha512(str(request.form.get('passwd')).encode('utf-8')).hexdigest()
+    usuario = Usuario(request.form.get('user'), request.form.get('email'), hash, request.form.get('end'))       #PEGA OS DADOS DO CADASTRO E JOGA PARA O BANCO
     db.session.add(usuario)
     db.session.commit()
     return redirect(url_for('usuario'))
@@ -162,7 +167,7 @@ def editarusuario(id):
     if request.method == 'POST':
         usuario.nome = request.form.get('user')
         usuario.email = request.form.get('email')
-        usuario.senha = request.form.get('passwd')
+        usuario.senha = hashlib.sha512(str(request.form.get('passwd')).encode('utf-8')).hexdigest()
         usuario.end = request.form.get('end')
 
         db.session.add(usuario)
