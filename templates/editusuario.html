@@ -5,26 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Old - Edição</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
 </head>
 <body>
-    <h2>Edição de {{titulo}}</h2>
-    <form action="/usuario/editar/{{ usuario.id }}" method="post">
-        <p><label for="user">Nome</label></p>
-        <p><input type="text" id="user" name="user" value="{{ usuario.nome }}"></p>
+    
+        <div class="page-header">
+            <div class="container-fluid"><h2>Edição de {{titulo}}</h2></div>
+                <form action="/usuario/editar/{{ usuario.id }}" method="post">
+                    <p><label for="user">Nome</label></p>
+                    <p><input type="text" id="user" name="user" value="{{ usuario.nome }}"></p>
 
-        <p><label for="email">E-mail</label></p>
-        <p><input type="text" id="email" name="email" value="{{ usuario.email }}"></p>
+                    <p><label for="email">E-mail</label></p>
+                    <p><input type="text" id="email" name="email" value="{{ usuario.email }}"></p>
 
-        <p><label for="passwd">Senha</label></p>
-        <p><input type="text" id="passwd" name="passwd" value="{{ usuario.senha }}"></p>
+                    <p><label for="passwd">Senha</label></p>
+                    <p><input type="text" id="passwd" name="passwd" value="{{ usuario.senha }}"></p>
 
-        <p><label for="end">Endereço</label></p>
-        <p><input type="text" id="end" name="end" value="{{ usuario.end }}"></p>
+                    <p><label for="end">Endereço</label></p>
+                    <p><input type="text" id="end" name="end" value="{{ usuario.end }}"></p>
 
-        <input type="submit" value="Alterar">
-    </form>
+                    <input type="submit" value="Alterar" class="btn btn-primary">
+                    <input type="submit" value="Cancelar" class="btn btn-primary">
+                </form>
 
-    <a href={{url_for("usuario")}}>Cancelar</a>
+        
+        </div>
+    
 
 
 </body>

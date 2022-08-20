@@ -8,55 +8,66 @@
     <link rel="stylesheet" href="../static/css/bootstrap.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <h2>Cadastro de {{titulo}}</h2>
-    <form action="/usuario/criar" method="post">
-        <div class="mb-3">
-            <label class="form-label" for="user">Nome</label>
-            <input type="text" class="form-control" id="user" name="user">
-
-
-            <label for="email" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
-            
-        </div>
-        <div class="mb-3">
-            <label for="passwd" class="form-label">Senha</label>
-            <input type="password" class="form-control" id="passwd" name="passwd">
-
-            <label class="form-label" for="end">Endereço</label>
-            <input type="text" class="form-control" id="end" name="end">
-        </div>
     
-        <button type="submit" value="cadastrar" class="btn btn-primary">Cadastrar</button>
-      </form>
+    <div class="container-fluid">
 
-    <h4>Lista de {{titulo}}</h4>
-    <table class="table table-striped table-responsive table-bordered">
-        <thead class="thead-default">
+        <div class="page-header">
+            <h2>Cadastro de {{titulo}}</h2>
+        </div>
+        <form action="/usuario/criar" method="post">
+            <div class="md-6">
+                <label class="form-label" for="user">Nome</label>
+                <input type="text" class="form-control" id="user" name="user">
+
+
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                
+            </div>
+            <div class="md-6">
+                <label for="passwd" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="passwd" name="passwd">
+
+                <label class="form-label" for="end">Endereço</label>
+                <input type="text" class="form-control" id="end" name="end">
+            </div>
+            <br>
+            <button type="submit" value="cadastrar" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+    <br>
+
+    
+
+        <div class="container-fluid">
+            <div class="page-header"><h4>Lista de {{titulo}}</h4></div>
+            <table class="table-warning">
+            <thead>
             <tr>
-                <tr>Nome</tr>
-                <tr>E-mail</tr>
-                <tr>Senha</tr>
-                <tr>Endereço</tr>
-                <tr>Deletar</tr>
-                <tr>Editar</tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Senha</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">Deletar</th>
+                <th scope="col">Editar</th>
             </tr>
-        </thead>
-        <tbody>
-            {% for usuario in usuarios %}
-                <tr>
-                    <td>{{ usuario.nome }}</td>
-                    <td>{{ usuario.email }}</td>
-                    <td>{{ usuario.senha }}</td>
-                    <td>{{ usuario.end }}</td>
-                    <td><a href={{url_for("deletarusuario",id=usuario.id) }}><img class="imglixo" src="{{ url_for('static', filename='lixo.png') }}" alt=""></a></td>
-                    
-                    <td><a href={{url_for("editarusuario",id=usuario.id) }}><img class="imgeditar" src="{{ url_for('static', filename='editar.png') }}" alt=""></a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                    <tr>
+                        <th scope="row">{{ usuario.id }}</th>
+                        <td>{{ usuario.nome }}</td>
+                        <td>{{ usuario.email }}</td>
+                        <td>{{ usuario.senha }}</td>
+                        <td>{{ usuario.end }}</td>
+                        <td><a href={{url_for("deletarusuario",id=usuario.id) }}><img class="imglixo" src="{{ url_for('static', filename='lixo.png') }}" alt=""></a></td>           
+                        <td><a href={{url_for("editarusuario",id=usuario.id) }}><img class="imgeditar" src="{{ url_for('static', filename='editar.png') }}" alt=""></a></td>
+                    </tr>
+                {% endfor %}    
+            </tbody>
+        </table></div>
 
-</body>
-</html>
+        

@@ -6,19 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Old - Seu novo, usado!</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
 </head>
 <body>
-    <h1>New Old</h1>
-    <p><a href={{ url_for("usuario") }}>Cadastro de Usuário</a></p>
-    <p><a href={{ url_for("anuncio") }}>Inserir anúncio</a></p>
-    <p><a href={{ url_for("pergunta") }}>Perguntas</a></p>
-    <p><a href={{ url_for("favorito") }}>Favorito</a></p>
-    <p><a href={{ url_for("categoria") }}>Categoria</a></p>
-    <p><a href={{ url_for("relVendas") }}>Relatório de vendas</a></p>
-    <p><a href={{ url_for("relCompras") }}>Histórico de compras</a></p>
+    <div class="container-fluid">
+        <h1> New Old</h1>
+        <p><a href={{ url_for("usuario") }}>Cadastro de Usuário</a></p>
+        <p><a href={{ url_for("anuncio") }}>Inserir anúncio</a></p>
+        <p><a href={{ url_for("pergunta") }}>Perguntas</a></p>
+        <p><a href={{ url_for("favorito") }}>Favorito</a></p>
+        <p><a href={{ url_for("categoria") }}>Categoria</a></p>
+        <p><a href={{ url_for("relVendas") }}>Relatório de vendas</a></p>
+        <p><a href={{ url_for("relCompras") }}>Histórico de compras</a></p>
 
 
-    <p><a href={{ url_for("logout") }}>LogOut</a></p>
+        <p><a href={{ url_for("logout") }}>LogOut</a></p>
+    </div>
+    
 
 
 </body>
