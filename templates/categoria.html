@@ -9,36 +9,47 @@
     <link rel="stylesheet" href="../static/css/bootstrap.css">
 </head>
 <body>
-    <h3>{{titulo}}</h3>
-    <form action="/categoria/criar" method="post">
-        <p><label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome"></p>
+    <div class="container-fluid"> 
+        <div class="page-header">
+            <h3>{{titulo}}</h3>
+        </div>
 
-        <p><label for="desc">Descrição</label>
-            <input type="text" name="desc" id="desc"></p>
+        <form action="/categoria/criar" method="post">
+            <label class="form-label" for="nome">Nome</label>
+            <input type="text" class="form-control" name="nome" id="nome"></p>
+
+            <label class="form-label" for="desc">Descrição</label>
+            <input type="text" class="form-control" name="desc" id="desc"></p>
         
-        <input type="submit" value="Cadastrar">
-    </form>
+            <button type="submit" value="cadastrar" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+    <br>
+   
 
-    <h4>Lista de {{titulo}}</h4>
-    <table>
+    <div class="container-fluid">
         <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>Deletar</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            {% for categoria in categorias %}
-                <tr>
-                    <td>{{ categoria.nome }}</td>
-                    <td>{{ categoria.desc }}</td>
-                    <td><a href={{url_for("deletarcategoria",id=categoria.id) }}><img class="imglixo" src="{{ url_for('static', filename='lixo.png') }}" alt=""></a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            <div class="page-header">Lista de {{titulo}}</div>
+                <table class="table-warning">
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Deletar</th>
+                    </tr>
+            </thead>
+            <tbody>
+                {% for categoria in categorias %}
+                    <tr>
+                        <th scope="row">{{ categoria.nome }}</td>
+                        <td>{{ categoria.desc }}</td>
+                        <td><a href={{url_for("deletarcategoria",id=categoria.id) }}><img class="imglixo" src="{{ url_for('static', filename='lixo.png') }}" alt=""></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            
+
+    </div>
+        
 </body>
 </html>

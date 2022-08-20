@@ -9,6 +9,25 @@
     <link rel="stylesheet" href="../static/css/bootstrap.css">
 </head>
 <body>
+    <header>
+        <div id="barra_acessibilidade" class="col d-none">
+            <ul>
+              <li>
+                <a href={{ url_for("index") }} accesskey="1">Ir para menu [1]</a></li>
+              <li>
+                <a href={{ url_for("usuario") }} accesskey="2">Ir para usuario [2]</a>
+              </li>
+              <li>
+                <a href={{ url_for("anuncio") }} accesskey="3">Ir para anuncio [3]</a>
+              </li>
+              <li>
+                <a href={{ url_for("categoria") }} accesskey="4">Ir para categoria [4]</a>
+              </li>
+            </ul>
+        </div>
+        
+    </header>
+
     <div class="container-fluid">
         <h1> New Old</h1>
         <p><a href={{ url_for("usuario") }}>Cadastro de Usuário</a></p>
