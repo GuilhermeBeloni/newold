@@ -8,16 +8,20 @@
     <link rel="stylesheet" href="../static/css/bootstrap.css">
 </head>
 <body>
-    <h4>Login</h4>
-    <form action="/login" method="post">
-        <p><label for="email">E-mail</label>
-        <input type="text" name="email" id="email"></p>
-       
+    <div class="container-fluid">
+        <div class="page-header"><h4>Login</h4></div>
         
-        <p><label for="passwd">Senha</label>
-        <input type="password" name="passwd" id="passwd"></p>
-        <p><input type="submit" value="Entrar"></p>
-    </form>
+            <form action="/login" method="post">
+                <p><label for="email">E-mail</label>
+                <input type="text" name="email" id="email"></p>
+            
+                
+                <p><label for="passwd">Senha</label>
+                <input type="password" name="passwd" id="passwd"></p>
+                <p><input type="submit" value="Entrar"></p>
+            </form>
+    </div>
+    
     
 </body>
 </html>
