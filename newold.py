@@ -105,8 +105,7 @@ def load_user(id):
 
 
 
-@app.route("/") 
-@login_required                                    #ROTA PAGINA INICIAL    
+@app.route("/")                                    #ROTA PAGINA INICIAL    
 def index():
     return render_template('index.html')
 
@@ -194,6 +193,7 @@ def deletarusuario(id):
 #anuncio
 
 @app.route('/cad/anuncio')
+@login_required
 def anuncio():
     return render_template('anuncio.html', anuncios = Anuncio.query.all(), categorias = Categoria.query.all(), titulo='Anúncios')
 
@@ -246,6 +246,7 @@ def favorito():
 
 
 @app.route('/cad/categoria')
+@login_required
 def categoria():
     return render_template('categoria.html', categorias = Categoria.query.all(), titulo= 'Categoria dos produtos')
 
@@ -274,16 +275,18 @@ def deletarcategoria(id):
 #relatorios
 
 @app.route('/relatorios/vendas')
+@login_required
 def relVendas():
     return render_template('relVendas.html', titulo='Seu relatório de vendas')
 
 
 
 @app.route('/relatarios/compras')
+@login_required
 def relCompras():
     return render_template('relCompras.html', titulo='Seu histórico de compras')
 
 
 if __name__ == 'newold':
     db.create_all()
-   # app.run()
+    #app.run()

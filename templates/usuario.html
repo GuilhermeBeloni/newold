@@ -16,7 +16,7 @@
         <div class="page-header">
             <h2>Cadastro de {{titulo}}</h2>
         </div>
-        <form action="/usuario/criar" method="post">
+        <form  class="col md-6" action="/usuario/criar" method="post">
             <div class="md-6">
                 <label class="form-label" for="user">Nome</label>
                 <input type="text" class="form-control" id="user" name="user">
@@ -43,32 +43,35 @@
 
         <div class="container-fluid">
             <div class="page-header"><h4>Lista de {{titulo}}</h4></div>
-            <table class="table-warning">
-            <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nome</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Senha</th>
-                <th scope="col">Endereço</th>
-                <th scope="col">Deletar</th>
-                <th scope="col">Editar</th>
-            </tr>
-            </thead>
-            <tbody>
-                {% for usuario in usuarios %}
-                    <tr>
-                        <th scope="row">{{ usuario.id }}</th>
-                        <td>{{ usuario.nome }}</td>
-                        <td>{{ usuario.email }}</td>
-                        <td>{{ usuario.senha }}</td>
-                        <td>{{ usuario.end }}</td>
-                        <td><a href={{url_for("deletarusuario",id=usuario.id) }}><img class="imglixo" src="{{ url_for('static', filename='lixo.png') }}" alt=""></a></td>           
-                        <td><a href={{url_for("editarusuario",id=usuario.id) }}><img class="imgeditar" src="{{ url_for('static', filename='editar.png') }}" alt=""></a></td>
-                    </tr>
-                {% endfor %}    
-            </tbody>
-            </table>
+            <div class="col md-6">
+                    <table class="table-warning">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Senha</th>
+                                <th scope="col">Endereço</th>
+                                <th scope="col">Deletar</th>
+                                <th scope="col">Editar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for usuario in usuarios %}
+                            <tr>
+                                <th scope="row">{{ usuario.id }}</th>
+                                <td>{{ usuario.nome }}</td>
+                                <td>{{ usuario.email }}</td>
+                                <td>{{ usuario.senha }}</td>
+                                <td>{{ usuario.end }}</td>
+                                <td><a href={{url_for("deletarusuario",id=usuario.id) }}><img class="imglixo" src="{{ url_for('static', filename='lixo.png') }}" alt=""></a></td>           
+                                <td><a href={{url_for("editarusuario",id=usuario.id) }}><img class="imgeditar" src="{{ url_for('static', filename='editar.png') }}" alt=""></a></td>
+                            </tr>
+                        {% endfor %}    
+                    </tbody>
+                    </table>
+                    </div>
+            
         </div>
 
         
