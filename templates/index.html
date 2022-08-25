@@ -13,7 +13,7 @@
 </head>
 <body> 
   <header>
-    <div class="bg-dark collapse show" id="navbarHeader" style="">
+    <div class="bg-dark collapse show" id="navbarHeader">
       <div class="container">
         <div class="row">
           <div class="col-sm-8 col-md-7 py-4">
@@ -21,11 +21,12 @@
             <p class="text-muted">New Old, Atividades de Internet Ltda. Rua do Catete, 359, Flamengo - 22220-001 - Rio de Janeiro, RJ</p>
           </div>
           <div class="col-sm-4 offset-md-1 py-4">
-            <h4 class="text-white">Contato</h4>
+            <h4 class="text-white">Menu</h4>
             <ul class="list-unstyled">
-              <li><a href="#" class="text-white">Siga no Instagram</a></li>
-              <li><a href="#" class="text-white">Curta no Facebook</a></li>
-              <li><a href="#" class="text-white">Envie-nos um E-mail</a></li>
+              <li><a href={{ url_for("anuncio") }}>Inserir anúncio</a></li>
+              <li><a href={{ url_for("relVendas") }}>Relatório de vendas</a></li>
+              <li><a href={{ url_for("relCompras") }}>Histórico de compras</a></li>
+              <li><a href={{ url_for("logout") }}>Sair</a></li>
             </ul>
           </div>
         </div>
@@ -33,7 +34,7 @@
     </div>
     <div class="navbar navbar-dark bg-dark shadow-sm">
       <div class="container">
-        <a href="#" class="navbar-brand d-flex align-items-center">
+        <a href={{ url_for("index") }} class="navbar-brand d-flex align-items-center">
           <strong>NEW OLD</strong>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="true" aria-label="Toggle navigation">
@@ -47,14 +48,14 @@
   <main>
     <section class="py-5 text center container">
       
-        <div class="row py-lg-5 al">
-          <div class="col-lg-6 col-md-8 mx-auto">
+        <div class="row py-lg-5 align-item-center">
+          <div class="row-lg-6 col-md-8 mx-auto align-item-center">
             
             <p>Aqui você compra o NOVO e VENDE o velho. Então o ciclo reinicia...</p>
-            <p>
+            <div class="row align-item-center">
               <a class="btn btn-primary my-2" href={{ url_for("login") }}>Entrar</a>
-              <a class="btn btn-danger my-2" href="#">Continuar sem Login</a>
-            </p>
+            </div>
+            
           </div>
         </div>
     </section>
@@ -67,13 +68,9 @@
               <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Produto</text></svg>
   
               <div class="card-body">
-                <p class="card-text">Descrição</p>
+                <p class="card-text">Nome</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  
+                  <p>Descrição</p>
                 </div>
               </div>
             </div>
@@ -83,13 +80,9 @@
               <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Produto</text></svg>
   
               <div class="card-body">
-                <p class="card-text">Descrição</p>
+                <p class="card-text">Nome</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  
+                  <p>Descrição</p>
                 </div>
               </div>
             </div>
@@ -99,13 +92,9 @@
               <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Produto</text></svg>
   
               <div class="card-body">
-                <p class="card-text">Descrição</p>
+                <p class="card-text">Nome</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  
+                  <p>Descrição</p>
                 </div>
               </div>
             </div>
@@ -116,13 +105,9 @@
               <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Produto</text></svg>
   
               <div class="card-body">
-                <p class="card-text">Descrição</p>
+                <p class="card-text">Nome</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  
+                  <p>Descrição</p>
                 </div>
               </div>
             </div>
@@ -132,13 +117,9 @@
               <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Produto</text></svg>
   
               <div class="card-body">
-                <p class="card-text">Descrição</p>
+                <p class="card-text">Nome</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                 
+                  <p>Descrição</p>
                 </div>
               </div>
             </div>
@@ -148,13 +129,9 @@
               <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Produto</text></svg>
   
               <div class="card-body">
-                <p class="card-text">Descrição</p>
+                <p class="card-text">Nome</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  
+                  <p>Descrição</p>
                 </div>
               </div>
             </div>
@@ -165,13 +142,9 @@
               <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Produto</text></svg>
   
               <div class="card-body">
-                <p class="card-text">Descrição</p>
+                <p class="card-text">Nome</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  
+                  <p>Descrição</p>
                 </div>
               </div>
             </div>
@@ -181,13 +154,9 @@
               <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Produto</text></svg>
   
               <div class="card-body">
-                <p class="card-text">Descrição</p>
+                <p class="card-text">Nome</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  
+                  <p>Descrição</p>
                 </div>
               </div>
             </div>
@@ -198,30 +167,6 @@
     </div>
 
   </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <header>
         <div id="barra_acessibilidade" class="col d-none">
@@ -253,6 +198,20 @@
         <p><a href={{ url_for("relCompras") }}>Histórico de compras</a></p>
         <p><a href={{ url_for("logout") }}>LogOut</a></p>
     </div>
+    <footer>
+      <div class="container" id="contact-area"> 
+        <div id="copy">
+          <div class="container">
+            <div class="col-md-12">
+             <p>
+              Desenvolvido por<a href="https://github.com/GuilhermeBeloni" target="blank">GuilhermeBeloni</a>&copy; 2022
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    </footer>  
     
 
 

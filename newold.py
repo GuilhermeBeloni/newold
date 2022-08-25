@@ -18,6 +18,8 @@ import hashlib
 
 
 
+
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://rootuser:120893guiTD!@localhost:3306/schema_mapOrm'    #INDICAÇÃO PARA O BANCO, USUÁRIO, SENHA, ENDEREÇO, PORTA E DB.
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://GuilhermeZacaria:120893guiTD!@GuilhermeZacariasBeloni.mysql.pythonanywhere-services.com:3306/GuilhermeZacaria$mapOrm'    #INDICAÇÃO PARA O BANCO, USUÁRIO, SENHA, ENDEREÇO, PORTA E DB.

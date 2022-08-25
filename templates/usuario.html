@@ -10,28 +10,27 @@
 </head>
 
 <body>
-    
-    <div class="container-fluid">
-
         <div class="page-header">
-            <h2>Cadastro de {{titulo}}</h2>
+            <h2 >Cadastro de {{titulo}}</h2>
         </div>
+        <br>
+        <br>
         <form  class="col md-6" action="/usuario/criar" method="post">
-            <div class="md-6">
-                <label class="form-label" for="user">Nome</label>
-                <input type="text" class="form-control" id="user" name="user">
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Nome</label>
+                <input type="text" class="form-control" id="user" name="user" placeholder="Digite seu nome">
 
 
-                <label for="email" class="form-label">E-mail</label>
-                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                <label for="email" class="col-sm-2 col-form-label">E-mail</label>
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="email@exemplo.com">
                 
             </div>
-            <div class="md-6">
-                <label for="passwd" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="passwd" name="passwd">
+            <div class="mb-3 row">
+                <label for="passwd" class="col-sm-2 col-form-label" >Senha</label>
+                <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Digite sua senha">
 
-                <label class="form-label" for="end">Endereço</label>
-                <input type="text" class="form-control" id="end" name="end">
+                <label class="col-sm-2 col-form-label" for="end">Endereço</label>
+                <input type="text" class="form-control" id="end" name="end" placeholder="Digite seu endereço">
             </div>
             <br>
             <button type="submit" value="cadastrar" class="btn btn-primary">Cadastrar</button>
@@ -41,10 +40,10 @@
 
     
 
-        <div class="container-fluid">
+        <div class="container-fluid d-none">
             <div class="page-header"><h4>Lista de {{titulo}}</h4></div>
             <div class="col md-6">
-                    <table class="table-warning">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
